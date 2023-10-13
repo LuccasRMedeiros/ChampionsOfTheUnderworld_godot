@@ -1,8 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnxfqksbk1xp0"]
+[gd_scene format=3 uid="uid://fhmqphocjayy"]
 
-[ext_resource type="Script" path="res://actors/common/Act_Common_GateLock.gd" id="1_513qv"]
-
-[node name="Act_Common_GateLock" type="Polygon2D"]
-polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
-script = ExtResource("1_513qv")
-lock_color = null
+[node name="Act_Common_GateLock" type="Node2D"]
