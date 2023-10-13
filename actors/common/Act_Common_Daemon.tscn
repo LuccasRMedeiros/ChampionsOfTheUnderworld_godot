@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2kxh88ggb07y"]
+
+[ext_resource type="Texture2D" uid="uid://117ly1dacgm8" path="res://sprites/deamon_kA_ph.png" id="1_511bk"]
+[ext_resource type="Script" path="res://actors/common/Act_Common_Daemon.gd" id="1_nyxb8"]
+[ext_resource type="Texture2D" uid="uid://32o265pgtqs2" path="res://sprites/deamon_kS_ph.png" id="3_ey121"]
+[ext_resource type="Texture2D" uid="uid://ccs56a7kofgau" path="res://sprites/deamon_kD_ph.png" id="4_23hsm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qapjd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_511bk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jy7f5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ey121")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26kli"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_23hsm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3efp7"]
+size = Vector2(48, 64)
+
+[node name="DaemonRoot" type="Area2D"]
+script = ExtResource("1_nyxb8")
+direction = -1
+
+[node name="DaemonSkinA" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_qapjd")
+
+[node name="DaemonSkinS" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_jy7f5")
+
+[node name="DaemonSkinD" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_26kli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_3efp7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b64ycf341m5dd"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_mt5jd"]
+[ext_resource type="PackedScene" uid="uid://bmrdmxfqkk3r1" path="res://actors/enemy/Act_Enemy_SpawnGate.tscn" id="1_uuxan"]
+[ext_resource type="PackedScene" uid="uid://3m640nnnb600" path="res://actors/player/Act_Player_Smasher.tscn" id="2_rlekt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3ab3"]
+size = Vector2(1280, 113)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_mt5jd")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.168627, 0.254902, 0.32549, 1)
+polygon = PackedVector2Array(-64, 560, 1216, 560, 1216, 768, -64, 768)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D"]
+position = Vector2(576, 632.5)
+shape = SubResource("RectangleShape2D_a3ab3")
+
+[node name="SpawnGate" parent="." instance=ExtResource("1_uuxan")]
+position = Vector2(920, 512)
+
+[node name="SmasherRoot" parent="." instance=ExtResource("2_rlekt")]
+position = Vector2(144, 544)

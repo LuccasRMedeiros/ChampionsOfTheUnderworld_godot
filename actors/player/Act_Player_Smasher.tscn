@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://3m640nnnb600"]
+
+[ext_resource type="Script" path="res://actors/player/Act_Player_Smasher.gd" id="1_gkhiv"]
+[ext_resource type="Texture2D" uid="uid://5n3gb0mqbyp" path="res://sprites/smasher_ph.png" id="1_lwug3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_74om1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lwug3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgaku"]
+size = Vector2(64, 64)
+
+[node name="SmasherRoot" type="StaticBody2D"]
+script = ExtResource("1_gkhiv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_74om1")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_dgaku")
