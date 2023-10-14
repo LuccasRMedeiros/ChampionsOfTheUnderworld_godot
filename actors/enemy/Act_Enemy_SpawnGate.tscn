@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://actors/enemy/Act_Enemy_SpawnGate.gd" id="1_i6n5y"]
 
-[node name="SpawnGateRoot" type="Node2D"]
+[node name="Act_Enemy_SpawnGate" type="Node2D"]
 script = ExtResource("1_i6n5y")
 
 [node name="Gate" type="Polygon2D" parent="."]

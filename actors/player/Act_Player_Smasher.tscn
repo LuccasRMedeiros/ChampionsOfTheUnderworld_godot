@@ -17,7 +17,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgaku"]
 size = Vector2(64, 64)
 
-[node name="SmasherRoot" type="StaticBody2D"]
+[node name="Act_Player_Smasher" type="StaticBody2D"]
 script = ExtResource("1_gkhiv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

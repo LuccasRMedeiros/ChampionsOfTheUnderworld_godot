@@ -41,7 +41,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3efp7"]
 size = Vector2(48, 64)
 
-[node name="DaemonRoot" type="Area2D"]
+[node name="Act_Common_Daemon" type="Area2D"]
 script = ExtResource("1_nyxb8")
 direction = -1
 
