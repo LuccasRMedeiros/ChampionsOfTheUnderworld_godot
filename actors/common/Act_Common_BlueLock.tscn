@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbv7yggkjw478"]
+
+[ext_resource type="Texture2D" uid="uid://dnvppauuiwocs" path="res://sprites/ph_blue.png" id="1_sfiyi"]
+[ext_resource type="Script" path="res://scripts/GateLock.gd" id="1_ug65b"]
+
+[node name="Act_Common_BlueLock" type="Sprite2D"]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(2, 2)
+texture = ExtResource("1_sfiyi")
+script = ExtResource("1_ug65b")
