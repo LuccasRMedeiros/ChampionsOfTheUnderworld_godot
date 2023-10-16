@@ -2,39 +2,39 @@ class_name GateLock
 
 extends Sprite2D
 
-var _lock_speed: float = 100.0
-var _max_movement: int = 32
-var _start_point: Vector2
+var _lock_speed = 100.0
+var _max_movement = 32
+var _end_position: Vector2
 
 enum LockDirection {UP, DOWN, LEFT, RIGHT}
 
-func move (delta, direction: LockDirection) -> bool:
-	var move_amount = (_lock_speed * delta) * 100 / _max_movement
-	move_amount = _max_movement if move_amount > _max_movement else move_amount
-
+func set_end_position(direction: LockDirection):
+	_end_position = position
+	
 	match direction:
 		LockDirection.UP:
-			if _start_point.y - position.y < _max_movement: 
-				position.y -= move_amount
-			else:
-				return true
-
+			_end_position.y -= _max_movement
+			
 		LockDirection.DOWN:
-			if position.y - _start_point.y < _max_movement:
-				position.y += move_amount
-			else:
-				return true
-
+			_end_position.y += _max_movement
+			
 		LockDirection.LEFT:
-			if _start_point.x - position.x < _max_movement:
-				position.x -= move_amount
-			else:
-				return true
-
+			_end_position.x -= _max_movement
+			
 		LockDirection.RIGHT:
-			if position.x - _start_point.x < _max_movement:
-				position.x += move_amount
-			else:
-				return true
+			_end_position.x += _max_movement
 
-	return false
+func move (delta: float, direction: LockDirection) -> bool:
+	var move_amount = _lock_speed * delta
+	var moved: float
+
+	match direction:
+		LockDirection.UP or LockDirection.DOWN:
+			moved = move_toward(position.y, _end_position.y, move_amount)
+			position.y += moved
+
+		LockDirection.LEFT or LockDirection.RIGHT:
+			moved = move_toward(position.x, _end_position.x, move_amount)
+			position.x += moved
+
+	return true if moved == 0.0 else false
