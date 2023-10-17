@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cecafbpf30mag"]
+[gd_scene load_steps=2 format=3 uid="uid://cecafbpf30mag"]
 
 [ext_resource type="Script" path="res://actors/common/Act_Common_SpawnGate.gd" id="1_8dbyu"]
-[ext_resource type="Script" path="res://actors/common/Selector.gd" id="2_2vy1j"]
 
 [node name="Act_Common_SpawnGate" type="Node2D"]
 script = ExtResource("1_8dbyu")
 
 [node name="GateShape" type="Polygon2D" parent="."]
+position = Vector2(56, 56)
 color = Color(0.431373, 0.431373, 0.431373, 1)
 polygon = PackedVector2Array(-40, 40, -40, -40, 40, -40, 40, 40, 56, 40, 56, -56, -56, -56, -56, 40)
 
-[node name="Selector" type="Polygon2D" parent="."]
-visible = false
+[node name="Cursor" type="Polygon2D" parent="."]
+position = Vector2(56, 56)
 color = Color(0.203922, 1, 0.709804, 1)
 polygon = PackedVector2Array(-40, -16, -40, 16, 40, 16, 40, -16)
-script = ExtResource("2_2vy1j")
