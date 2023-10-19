@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx1lixkjgems7"]
+
+[ext_resource type="Texture2D" uid="uid://cnpyenaehijxe" path="res://sprites/summoner_ph.png" id="1_lnuus"]
+[ext_resource type="Script" path="res://actors/player/Act_Player_Summoner.gd" id="1_uyybn"]
+[ext_resource type="PackedScene" uid="uid://cecafbpf30mag" path="res://actors/common/Act_Common_SpawnGate.tscn" id="3_j2sby"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oj3sp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lnuus")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Act_Player_Summoner" type="Node2D"]
+script = ExtResource("1_uyybn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oj3sp")
+animation = &"idle"
+
+[node name="Act_Common_SpawnGate" parent="." instance=ExtResource("3_j2sby")]
+position = Vector2(136, 80)
+summon_direction = 1

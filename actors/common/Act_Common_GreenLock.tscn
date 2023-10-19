@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://df6fjqy7o4ekq"]
+[gd_scene load_steps=3 format=3 uid="uid://dhmwd7gps67wl"]
 
-[ext_resource type="Script" path="res://scripts/GateLock.gd" id="1_6p4lw"]
 [ext_resource type="Texture2D" uid="uid://ch0x5b246ak3q" path="res://sprites/ph_green.png" id="1_rjesf"]
+[ext_resource type="Script" path="res://actors/common/Act_Common_GreenLock.gd" id="2_nf6y0"]
 
 [node name="Act_Common_GreenLock" type="Sprite2D"]
 position = Vector2(-2.38419e-07, -2.38419e-07)
 scale = Vector2(2, 2)
 texture = ExtResource("1_rjesf")
-script = ExtResource("1_6p4lw")
+script = ExtResource("2_nf6y0")

@@ -6,34 +6,34 @@ var _lock_speed = 100.0
 var _max_movement = 32
 var _end_position: Vector2
 
-enum LockDirection {UP, DOWN, LEFT, RIGHT}
+enum LockDirections {UP, DOWN, LEFT, RIGHT}
 
-func set_end_position(direction: LockDirection):
+func set_end_position(direction: LockDirections):
 	_end_position = position
 	
 	match direction:
-		LockDirection.UP:
+		LockDirections.UP:
 			_end_position.y -= _max_movement
 			
-		LockDirection.DOWN:
+		LockDirections.DOWN:
 			_end_position.y += _max_movement
 			
-		LockDirection.LEFT:
+		LockDirections.LEFT:
 			_end_position.x -= _max_movement
 			
-		LockDirection.RIGHT:
+		LockDirections.RIGHT:
 			_end_position.x += _max_movement
 
-func move (delta: float, direction: LockDirection) -> bool:
+func move (delta: float, orientation: Definitions.CursorOrientations) -> bool:
 	var move_amount = _lock_speed * delta
 	var moved: float
 
-	match direction:
-		LockDirection.UP or LockDirection.DOWN:
+	match orientation:
+		Definitions.CursorOrientations.HORIZONTAL:
 			moved = move_toward(position.y, _end_position.y, move_amount)
 			position.y += moved
 
-		LockDirection.LEFT or LockDirection.RIGHT:
+		Definitions.CursorOrientations.VERTICAL:
 			moved = move_toward(position.x, _end_position.x, move_amount)
 			position.x += moved
 
