@@ -2,17 +2,18 @@ extends Node2D
 
 enum GateState {LOCKED, OPEN}
 enum CursorStates {SELECTING, MOVING}
-enum CursorDirections {FORWARD, BACKWARD}
 enum CursorOrientations {HORIZONTAL, VERTICAL}
 
 var _next_warp = 24
 var _loop_warp = -48
 var _gate_state = GateState.LOCKED
 var _cursor_state = CursorStates.SELECTING
+var _cursor_orientation = CursorOrientations.HORIZONTAL
+var _rc_position = 1
 var _lock_matrix = [
-	[Definitions, Definitions, Definitions],
-	[Definitions, Definitions, Definitions],
-	[Definitions, Definitions, Definitions]
+	[Definitions.LockColors, Definitions.LockColors, Definitions.LockColors],
+	[Definitions.LockColors, Definitions.LockColors, Definitions.LockColors],
+	[Definitions.LockColors, Definitions.LockColors, Definitions.LockColors]
 	]
 var _lock_node_matrix = [
 	[GateLock, GateLock, GateLock],
@@ -20,32 +21,31 @@ var _lock_node_matrix = [
 	[GateLock, GateLock, GateLock]
 	]
 
-var cursor_orientation = CursorOrientations.HORIZONTAL
-var rc_position = 1
+@export var summon_direction: Definitions.Directions
 
-func move_cursor(direction: CursorDirections):
+func move_cursor(direction: Definitions.CursorDirections):
 	var cursor_warp: Vector2
 	var warp_amount = _next_warp
 
-	if direction == CursorDirections.FORWARD:
-		rc_position = rc_position + 1 
+	if direction == Definitions.CursorDirections.FORWARD:
+		_rc_position = _rc_position + 1 
 
-		if rc_position == 3:
-			rc_position = 0
+		if _rc_position == 3:
+			_rc_position = 0
 			warp_amount = _loop_warp
 		
 		warp_amount *= -1
 
-	elif direction == CursorDirections.BACKWARD:
-		rc_position = rc_position - 1
+	elif direction == Definitions.CursorDirections.BACKWARD:
+		_rc_position = _rc_position - 1
 		
-		if rc_position == -1:
-			rc_position = 2
+		if _rc_position == -1:
+			_rc_position = 2
 			warp_amount = _loop_warp
 
-	if cursor_orientation == CursorOrientations.HORIZONTAL:
+	if _cursor_orientation == CursorOrientations.HORIZONTAL:
 		cursor_warp = Vector2(0.0, float(warp_amount))
-	elif cursor_orientation == CursorOrientations.VERTICAL:
+	elif _cursor_orientation == CursorOrientations.VERTICAL:
 		cursor_warp = Vector2(float(warp_amount), 0.0)
 
 	$Cursor.position -= cursor_warp
@@ -56,12 +56,12 @@ func change_cursor_orientation():
 	$Cursor.position.x = position_bckp.y
 	$Cursor.position.y = position_bckp.x
 
-	if cursor_orientation == CursorOrientations.HORIZONTAL:
+	if _cursor_orientation == CursorOrientations.HORIZONTAL:
 		$Cursor.rotation_degrees = 90.0
-		cursor_orientation = CursorOrientations.VERTICAL
+		_cursor_orientation = CursorOrientations.VERTICAL
 	else:
 		$Cursor.rotation_degrees = 0
-		cursor_orientation = CursorOrientations.HORIZONTAL
+		_cursor_orientation = CursorOrientations.HORIZONTAL
 
 func shuffle_matrix():
 	var lock_array = [
@@ -101,3 +101,11 @@ func _ready():
 
 		new_lock_position.x -= 72.0
 		new_lock_position.y -= 24.0
+
+func _process(delta):
+	match _cursor_state:
+		CursorStates.SELECTING:
+			$Cursor.visible = true
+
+		CursorStates.MOVING:
+			$Cursor.visible = false
