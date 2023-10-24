@@ -12,3 +12,6 @@ func _process(delta):
 		$Act_Common_SpawnGate.move_cursor(Definitions.CursorDirections.FORWARD)
 	elif Input.is_action_just_pressed("ui_up"):
 		$Act_Common_SpawnGate.move_cursor(Definitions.CursorDirections.BACKWARD)
+
+	if Input.is_action_just_pressed("ui_right"):
+		$Act_Common_SpawnGate.move_locks(Definitions.Directions.RIGHT)

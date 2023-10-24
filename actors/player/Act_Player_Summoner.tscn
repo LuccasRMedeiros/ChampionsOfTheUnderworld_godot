@@ -24,3 +24,4 @@ animation = &"idle"
 
 [node name="Act_Common_SpawnGate" parent="." instance=ExtResource("3_j2sby")]
 position = Vector2(136, 80)
+summon_direction = 1
