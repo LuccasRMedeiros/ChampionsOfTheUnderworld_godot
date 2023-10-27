@@ -1,15 +1,21 @@
 extends Area2D
 
-var CAN_BE_HIT: bool
-var MOVE_SPEED = 300.0
+
+signal has_died
+
+
+var _can_be_destroyied: bool
+var _move_speed = 300.0
+
 
 @export var assingned_key: Key = KEY_A
 @export var direction: Definitions.Directions = Definitions.Directions.RIGHT
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	MOVE_SPEED *= direction
-	CAN_BE_HIT = false
+	_move_speed *= direction
+	_can_be_destroyied = false
 	$CollisionShape2D.position.x *= direction
 	
 	match assingned_key:
@@ -20,16 +26,19 @@ func _ready():
 		KEY_D:
 			$DaemonSkinD.visible = true
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position.x += MOVE_SPEED * delta
+	position.x += _move_speed * delta
 
-	if CAN_BE_HIT and Input.is_key_pressed(assingned_key):
+	if _can_be_destroyied and Input.is_key_pressed(assingned_key):
 		queue_free()
+
 
 func _on_body_entered(body):
 	if body is Smasher:
-		CAN_BE_HIT = true
+		_can_be_destroyied = true
+
 
 func _on_body_exited(body):
-	CAN_BE_HIT = false
+	_can_be_destroyied = false

@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://actors/common/Act_Common_GreenLock.gd" id="2_nf6y0"]
 
 [node name="Act_Common_GreenLock" type="Sprite2D"]
-position = Vector2(-2.38419e-07, -2.38419e-07)
 scale = Vector2(2, 2)
 texture = ExtResource("1_rjesf")
 script = ExtResource("2_nf6y0")

@@ -19,7 +19,7 @@ position = Vector2(576, 632.5)
 shape = SubResource("RectangleShape2D_a3ab3")
 
 [node name="SpawnGate" parent="." instance=ExtResource("1_uuxan")]
-position = Vector2(920, 512)
+position = Vector2(920, 536)
 
 [node name="SmasherRoot" parent="." instance=ExtResource("2_rlekt")]
 position = Vector2(144, 544)

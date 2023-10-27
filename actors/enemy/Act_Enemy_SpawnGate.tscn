@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmrdmxfqkk3r1"]
+[gd_scene load_steps=3 format=3 uid="uid://bmrdmxfqkk3r1"]
 
 [ext_resource type="Script" path="res://actors/enemy/Act_Enemy_SpawnGate.gd" id="1_i6n5y"]
+[ext_resource type="Script" path="res://scripts/Spawner.gd" id="2_mc8yt"]
 
 [node name="Act_Enemy_SpawnGate" type="Node2D"]
-position = Vector2(0, 8)
 script = ExtResource("1_i6n5y")
 
 [node name="SpawnGateShape" type="Polygon2D" parent="."]
 color = Color(0.509804, 0.509804, 0.509804, 1)
 polygon = PackedVector2Array(-48, 40, -64, 40, -64, -72, 64, -72, 64, 40, 48, 40, 48, -56, -48, -56)
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("2_mc8yt")
+direction = -1

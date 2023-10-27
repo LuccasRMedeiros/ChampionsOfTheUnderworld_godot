@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cecafbpf30mag"]
+[gd_scene load_steps=3 format=3 uid="uid://cecafbpf30mag"]
 
 [ext_resource type="Script" path="res://actors/common/Act_Common_SpawnGate.gd" id="1_8dbyu"]
+[ext_resource type="Script" path="res://scripts/Spawner.gd" id="2_1wxlj"]
 
 [node name="Act_Common_SpawnGate" type="Node2D"]
 script = ExtResource("1_8dbyu")
@@ -10,5 +11,9 @@ color = Color(0.203922, 1, 0.709804, 1)
 polygon = PackedVector2Array(-40, -16, -40, 16, 40, 16, 40, -16)
 
 [node name="GateShape" type="Polygon2D" parent="."]
+z_index = 1
 color = Color(0.431373, 0.431373, 0.431373, 1)
 polygon = PackedVector2Array(-40, 40, -40, -40, 40, -40, 40, 40, 56, 40, 56, -56, -56, -56, -56, 40)
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("2_1wxlj")

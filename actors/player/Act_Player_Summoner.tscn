@@ -25,3 +25,7 @@ animation = &"idle"
 [node name="Act_Common_SpawnGate" parent="." instance=ExtResource("3_j2sby")]
 position = Vector2(136, 80)
 summon_direction = 1
+
+[connection signal="close_gate" from="Act_Common_SpawnGate" to="." method="_on_act_common_spawn_gate_close_gate"]
+[connection signal="open_gate" from="Act_Common_SpawnGate" to="." method="_on_act_common_spawn_gate_open_gate"]
+[connection signal="select" from="Act_Common_SpawnGate" to="." method="_on_act_common_spawn_gate_select"]
