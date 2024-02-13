@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccmpdjo70at31"]
+
+[ext_resource type="Script" path="res://actors/player/Act_Player_Caster.gd" id="1_12jhm"]
+[ext_resource type="Texture2D" uid="uid://bes2fkdjg7af8" path="res://sprites/caster_ph.png" id="2_p5jha"]
+[ext_resource type="PackedScene" uid="uid://dci8em31hva2a" path="res://actors/common/Act_Common_CastingLine.tscn" id="3_414ub"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w4yvc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p5jha")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Act_Player_Caster" type="Node2D"]
+script = ExtResource("1_12jhm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w4yvc")
+animation = &"idle"
+
+[node name="Act_Common_CastingLine" parent="." instance=ExtResource("3_414ub")]

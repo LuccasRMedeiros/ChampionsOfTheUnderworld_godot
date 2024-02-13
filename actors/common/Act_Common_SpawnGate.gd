@@ -1,7 +1,7 @@
 extends Node2D
 
 
-enum GateStates {LOCKED, OPEN, CLOSE}
+enum GateStates {LOCKED, OPEN, AWAIT_TO_CLOSE, CLOSE}
 
 
 signal select
@@ -13,6 +13,7 @@ var _next_warp = 24
 var _loop_warp = -48
 var _gate_state = GateStates.LOCKED
 var _cursor_rc = 1
+var _daemons = 0
 var _gate_lock_red = preload("res://actors/common/Act_Common_RedLock.tscn")
 var _gate_lock_green = preload("res://actors/common/Act_Common_GreenLock.tscn")
 var _gate_lock_blue = preload("res://actors/common/Act_Common_BlueLock.tscn")
@@ -28,45 +29,6 @@ var cursor_orientation = Definitions.CursorOrientations.HORIZONTAL
 
 
 @export var summon_direction: Spawner.DaemonDirections
-
-
-func _change_cursor_orientation():
-	var position_bckp = $Cursor.position
-	
-	$Cursor.position.x = position_bckp.y
-	$Cursor.position.y = position_bckp.x
-
-	if cursor_orientation == Definitions.CursorOrientations.HORIZONTAL:
-		$Cursor.rotation_degrees = 90.0
-		cursor_orientation = Definitions.CursorOrientations.VERTICAL
-	else:
-		$Cursor.rotation_degrees = 0
-		cursor_orientation = Definitions.CursorOrientations.HORIZONTAL
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	$Spawner.direction = summon_direction
-
-	shuffle_matrix()
-
-	for row_i in _lock_node_matrix.size():
-		for column_i in _lock_node_matrix[row_i].size():
-			add_child(_lock_node_matrix[row_i][column_i])
-
-
-func _process(delta):
-	match _gate_state:
-		GateStates.OPEN:
-			if $Spawner.spawn(delta) == 3:
-				$Cursor.visible = true
-				$Spawner.reset_spawn_number()
-				_gate_state = GateStates.CLOSE
-				close_gate.emit()
-
-		GateStates.CLOSE:
-			shuffle_matrix()
-			_gate_state = GateStates.LOCKED
 
 
 func move_cursor(direction: Definitions.CursorDirections):
@@ -273,3 +235,49 @@ func shuffle_matrix():
 	for row_i in _lock_node_matrix.size():
 		for lock in _lock_node_matrix[row_i]:
 			add_child(lock)
+
+
+func _change_cursor_orientation():
+	var position_bckp = $Cursor.position
+
+	$Cursor.position.x = position_bckp.y
+	$Cursor.position.y = position_bckp.x
+
+	if cursor_orientation == Definitions.CursorOrientations.HORIZONTAL:
+		$Cursor.rotation_degrees = 90.0
+		cursor_orientation = Definitions.CursorOrientations.VERTICAL
+	else:
+		$Cursor.rotation_degrees = 0
+		cursor_orientation = Definitions.CursorOrientations.HORIZONTAL
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$Spawner.direction = summon_direction
+
+	shuffle_matrix()
+
+	for row_i in _lock_node_matrix.size():
+		for column_i in _lock_node_matrix[row_i].size():
+			add_child(_lock_node_matrix[row_i][column_i])
+
+
+func _process(delta):
+	match _gate_state:
+		GateStates.OPEN:
+			_daemons += $Spawner.spawn(delta)
+
+			if _daemons == 3:
+				_gate_state = GateStates.AWAIT_TO_CLOSE
+
+		GateStates.CLOSE:
+			$Cursor.visible = true
+			shuffle_matrix()
+			_gate_state = GateStates.LOCKED
+
+
+func _on_spawner_all_daemons_died():
+	_gate_state = GateStates.CLOSE
+	_daemons = 0
+
+	close_gate.emit()

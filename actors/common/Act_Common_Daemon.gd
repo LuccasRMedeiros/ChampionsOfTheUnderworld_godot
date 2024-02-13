@@ -7,7 +7,6 @@ signal has_died
 var _can_be_destroyied: bool
 var _move_speed = 300.0
 
-
 @export var assingned_key: Key = KEY_A
 @export var direction: Definitions.Directions = Definitions.Directions.RIGHT
 
@@ -31,7 +30,8 @@ func _ready():
 func _process(delta):
 	position.x += _move_speed * delta
 
-	if _can_be_destroyied and Input.is_key_pressed(assingned_key):
+	if (_can_be_destroyied and Input.is_key_pressed(assingned_key)) \
+	or (global_position.x < -100 or global_position.x > 1300):
 		queue_free()
 
 
@@ -40,5 +40,9 @@ func _on_body_entered(body):
 		_can_be_destroyied = true
 
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	_can_be_destroyied = false
+
+
+func _on_tree_exiting():
+	has_died.emit()

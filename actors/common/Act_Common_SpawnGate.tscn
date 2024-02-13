@@ -17,3 +17,5 @@ polygon = PackedVector2Array(-40, 40, -40, -40, 40, -40, 40, 40, 56, 40, 56, -56
 
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource("2_1wxlj")
+
+[connection signal="all_daemons_died" from="Spawner" to="." method="_on_spawner_all_daemons_died"]

@@ -1,13 +1,17 @@
 extends Node2D
 
+
 enum SummonerStates { PICKING, MOVING, SUMMONING }
+
 
 var _state = SummonerStates.PICKING
 var _lock_direction: GateLock.LockDirections
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dci8em31hva2a"]
+
+[ext_resource type="Script" path="res://actors/common/Act_Common_CastingLine.gd" id="1_0oj5w"]
+
+[node name="Act_Common_CastingLine" type="Line2D"]
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_0oj5w")
+
+[node name="NormalizedLine" type="Line2D" parent="."]
+default_color = Color(0.619608, 0.00392157, 0.905882, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Thunder" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(168, -8)
+points = PackedVector2Array(192, 64, 128, 152, 192, 152, 128, 256)
+default_color = Color(0, 0, 0, 1)
+
+[node name="Fire" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(-272, 40)
+points = PackedVector2Array(374, 62, 502, 102, 374, 158)
+default_color = Color(0, 0, 0, 1)
+
+[node name="Ice" type="Line2D" parent="."]
+z_index = -1
+position = Vector2(-232, -8)
+points = PackedVector2Array(752, 72, 664, 192, 736, 256, 800, 192, 736, 160)
+default_color = Color(0, 0, 0, 1)
